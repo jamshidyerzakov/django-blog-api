@@ -6,6 +6,6 @@ You can check here — <a href='http:\\blog-tutorial-7657.herokuapp.com'>Heroku 
 
 # Setup
 
-Install all packages from <b> requriements.txt. <\b> 
+Install all packages from <strong> requriements.txt. </strong> 
 <br>
 You can check the docs after the installations here — localhost:8000/swagger/
