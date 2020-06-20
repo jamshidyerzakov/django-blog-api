@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Category, Comment
+from .models import Post, Category
 from django.contrib.auth.models import Permission
 
 
@@ -34,19 +34,6 @@ class PostAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('category_title', 'description')
     search_fields = ['category_title']
-
-
-@admin.register(Comment)
-class CommentAdmin(admin.ModelAdmin):
-    fieldsets = [
-        ('Commenter', {'fields': ['commenter']}),
-        ('Content', {'fields': ['content']}),
-        ('post', {'fields': ['post']}),
-        ('Reply to', {'fields': ['reply_to']}),
-    ]
-    list_display = ('commenter', 'post', 'content', 'reply_to', 'date_created')
-    search_fields = ['content']
-
 
 admin.site.register(Permission)
 admin.site.site_title = "Django Blog"

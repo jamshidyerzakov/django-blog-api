@@ -18,8 +18,8 @@ class UserManager(BaseUserManager):
                     ):
         if not email:
             raise ValueError("Users must have an email address")
-        if not password:
-            raise ValueError("Users must have a password")
+        # if not password:
+        #     raise ValueError("Users must have a password")
         user_obj = self.model(
             email=self.normalize_email(email),
             first_name=first_name,
@@ -69,7 +69,7 @@ class User(AbstractUser):
     is_admin = models.BooleanField(default=False)
     img = models.ImageField(verbose_name="Image")
     date_joined = models.DateTimeField(auto_now_add=True)
-    liked_posts = models.ManyToManyField('post.Post', related_name='liked_posts', verbose_name='Liked Post')
+    liked_posts = models.ManyToManyField('post.Post', related_name='liked_posts', verbose_name='Liked Post', blank=True)
     is_superuser = None
     groups = None
     # user_permissions = None

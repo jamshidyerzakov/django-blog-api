@@ -12,13 +12,13 @@ from .permissions import IsRightUser
 class UserDetailView(generics.RetrieveAPIView):
     serializer_class = UserListDetailCreateSerializer
     queryset = User.objects.all()
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
 
 class UserUpdateView(generics.UpdateAPIView):
     serializer_class = UserListDetailCreateSerializer
     queryset = User.objects.all()
-    permission_classes = (permissions.IsAuthenticated,  IsRightUser)
+    # permission_classes = (permissions.IsAuthenticated,  IsRightUser)
 
 
 class UserDestroyView(generics.DestroyAPIView):
@@ -28,13 +28,13 @@ class UserDestroyView(generics.DestroyAPIView):
 
 class UserCreateView(generics.CreateAPIView):
     serializer_class = UserListDetailCreateSerializer
-    permission_classes = (permissions.IsAuthenticated, )
+    # permission_classes = (permissions.IsAuthenticated, )
 
 
 class UserListView(generics.ListAPIView):
     serializer_class = UserListDetailCreateSerializer
     queryset = User.objects.all()
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
 
 class AddLikedPostView(APIView):

@@ -1,22 +1,21 @@
 from accounts.models import User
 
 from django_filters.rest_framework import DjangoFilterBackend
-from .permissions import IsAdminUser, IsStaffUser, IsRightUser
+from .permissions import IsStaffUser, IsRightUser
 from rest_framework import generics, permissions
-from post.models import Post, Comment, Category
+from post.models import Post, Category
 from post.service import PostFilter, PaginationPosts
 from .serializers import (
     PostListSerializer,
     PostDetailSerializer,
     PostCreateSerializer,
-    CommentCreateSerializer,
-    CommentSerializer,
     CategoryDetailSerializer,
     CategoryListSerializer,
-    CategorySerializer,
 )
+# you can add django_filter
 
 # GET
+
 
 class PostDetailView(generics.RetrieveAPIView):
     """Retrieving a post"""
@@ -30,14 +29,6 @@ class CategoryDetailView(generics.RetrieveAPIView):
     queryset = Category.objects.all()
     serializer_class = CategoryDetailSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-
-class CommentDetailView(generics.RetrieveAPIView):
-    """Retrieving a comment"""
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
 
 
 # PATCH, PUT
@@ -57,20 +48,7 @@ class PostUpdateView(generics.UpdateAPIView):
     permission_classes = [permissions.IsAuthenticated, IsRightUser]
 
 
-class CommentUpdateView(generics.UpdateAPIView):
-    """Updating comment"""
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-    permission_classes = [permissions.IsAuthenticated, IsRightUser]
-
-
 # POST
-
-
-class CommentCreateView(generics.CreateAPIView):
-    """Adding comments to the post"""
-    serializer_class = CommentCreateSerializer
-    permission_classes = [permissions.IsAuthenticated]
 
 
 class CategoryCreateView(generics.CreateAPIView):
@@ -88,16 +66,7 @@ class PostCreateView(generics.CreateAPIView):
 # GET lists
 
 
-class CommentListView(generics.ListAPIView):
-        """Getting list of comments"""
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
-    filter_backends = (DjangoFilterBackend, )
-
-
 class PostListView(generics.ListAPIView):
-        """Getting list of posts"""
     queryset = Post.objects.all()
     serializer_class = PostListSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
@@ -107,7 +76,6 @@ class PostListView(generics.ListAPIView):
 
 
 class CategoryListView(generics.ListAPIView):
-        """Getting list of categories"""
     queryset = Category.objects.all()
     serializer_class = CategoryListSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
@@ -123,13 +91,51 @@ class CategoryDestroyView(generics.DestroyAPIView):
     permission_classes = [IsStaffUser]
 
 
-class CommentDestroyView(generics.DestroyAPIView):
-    """Deleting comment"""
-    queryset = Comment.objects.all()
-    permission_classes = [IsStaffUser]
-
-
 class PostDestroyView(generics.DestroyAPIView):
     """Deleting post"""
     queryset = Post.objects.all()
     permission_classes = [IsStaffUser]
+
+
+# class PostListView(generics.ListAPIView):
+#     """Returning list of posts"""
+#     queryset = Post.objects.all()
+#     serializer_class = PostListSerializer
+#
+#
+# class PostDetailView(generics.RetrieveAPIView):
+#     """Returning single a post"""
+#     queryset = Post.objects.all()
+#     serializer_class = PostDetailSerializer
+
+
+# class CategoryListView(generics.ListAPIView):
+#     """Returning list of categories"""
+#     queryset = Category.objects.all()
+#     serializer_class = CategoryListSerializer
+#
+#
+# class CategoryDetailView(generics.RetrieveAPIView):
+#     """Returning a single category"""
+#     queryset = Category.objects.all()
+#     serializer_class = CategoryDetailSerializer
+
+# class PostListView(APIView):
+#     """Returning list of posts"""
+#     def get(self, request):
+#         posts = Post.objects.all()
+#         serializer = PostListSerializer(posts, many=True)
+#         return Response(serializer.data)
+
+
+# class PostDetailView(APIView):
+#     """Returning single post"""
+#     def get(self, request, pk):
+#         post = Post.objects.get(id=pk)
+#         serializer = PostDetailSerializer(post)
+#         return Response(serializer.data)
+
+
+# class CommentCreateView(generics.CreateAPIView):
+#     """Adding comments to the post"""
+#     serializer_class = CommentCreateSerializer

@@ -1,6 +1,6 @@
 from django_filters import rest_framework as filters
 from rest_framework.response import Response
-
+from rest_framework import serializers
 from .models import Post
 from rest_framework.pagination import PageNumberPagination
 #
@@ -31,3 +31,10 @@ class PaginationPosts(PageNumberPagination):
             'count': self.page.paginator.count,
             'results': data
         })
+
+
+class RecursiveSerializer(serializers.Serializer):
+    """Recursive display of children"""
+    def to_representation(self, value):
+        serializer = self.parent.parent.__class__(value, context=self.context)
+        return serializer.data
