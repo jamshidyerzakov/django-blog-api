@@ -1,15 +1,31 @@
-# blog-api
-API for a blog written in django for ProData project
+# Blog-API
+API for a blog written in django
 
-You can check server side here (testing period) — <a href='http://blog-tutorial-7657.herokuapp.com/swagger/'>Heroku app</a>
-
-You can check client side here (testing period) — <a href='http://prodata-test.herokuapp.com/auth/register'>Heroku app</a>
-
+You can check server side here (testing period) — http://blog-tutorial-7657.herokuapp.com/swagger/
 
 # Setup
 
-Install all packages from <strong> requriements.txt. </strong> 
-<br>
-You can check the docs after the installations here — localhost:8000/swagger/
+Create virtual environment and create a new django project.
 
-Further setup instructions will be written soon.
+Install all packages from <strong> requirements.txt. </strong> :
+
+<code>pip install django-taggit==1.3.0 djangorestframework-simplejwt==4.4.0 
+djoser==2.0.3 drf-yasg==1.17.1 Pillow==7.1.2 
+django-rest-framework-social-oauth2==1.1.0 
+django-filter==2.3.0 
+service-identity==18.1.0 pyOpenSSL==19.1.0
+</code>
+
+Make migrations and migrate:
+
+<code>python manage.py makemigrations</code>
+
+<code>python manage.py migrate</code>
+
+Run the server and check the documentation for further actions:
+
+<code>python manage.py runserver</code>
+
+Go to http://127.0.0.1:8000/swagger/ in order to check the docs
+
+
