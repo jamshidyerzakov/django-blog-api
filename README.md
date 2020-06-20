@@ -1,7 +1,7 @@
 # Blog-API
 API for a blog written in django
 
-You can check server side here (testing period) — http://blog-tutorial-7657.herokuapp.com/swagger/
+You can check here (testing period) — http://blog-tutorial-7657.herokuapp.com/swagger/
 
 # Setup
 
