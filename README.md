@@ -31,3 +31,7 @@ Run the server and check the documentation for further actions:
 <code>>>> python manage.py runserver</code>
 
 Go to http://127.0.0.1:8000/swagger/ in order to check the docs
+
+# Contributions
+
+Pull requests are welcome!
