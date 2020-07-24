@@ -4,6 +4,7 @@ from .models import Comment
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
+    """Admin panel for Comment model"""
     fieldsets = [
         ('Commenter', {'fields': ['commenter']}),
         ('Content', {'fields': ['content']}),

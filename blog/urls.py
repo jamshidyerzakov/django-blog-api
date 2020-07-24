@@ -1,23 +1,20 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+
+import accounts
 from .yasg import urlpatterns as doc_urls
 from django.conf.urls.static import static
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-    TokenVerifyView
-)
+
 
 urlpatterns = [
+    # path('admin/', admin.site.urls),
+    path('admin/api/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
-    path('', include('post.api.urls')),
-    path('', include('accounts.api.urls')),
-    # jwt token
-    # path('token/', TokenObtainPairView.as_view()),
-    # path('token/refresh/', TokenRefreshView.as_view()),
-    # path('token/verify/', TokenVerifyView.as_view()),
+
+    path('', include('post.urls')),
+    path('', include(('accounts.urls', "accounts"), namespace="account")),
+    path('', include('comments.urls')),
 
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),

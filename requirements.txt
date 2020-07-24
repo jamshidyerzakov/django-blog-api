@@ -7,3 +7,4 @@ django-rest-framework-social-oauth2==1.1.0
 django-filter==2.3.0
 service-identity==18.1.0
 pyOpenSSL==19.1.0
+django-cors-headers==3.4.0

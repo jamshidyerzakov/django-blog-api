@@ -1,6 +1,7 @@
-'db.sqlite3' 
-'**/__pycache__/' 
-'*.pyc' 
-"staticfiles/"
-'*/.idea/'
-'static/'
+db.sqlite3
+**/__pycache__/
+*.pyc
+staticfiles/
+.idea
+static/
+media/

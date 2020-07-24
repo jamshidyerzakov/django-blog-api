@@ -4,9 +4,18 @@ from datetime import timedelta
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-SECRET_KEY = '2%&y5bnwd0go(ycc)jz$gys@o0nkws5adasdo7tuyv@hj!7ow(hwzhn'
-DEBUG = True
+SECRET_KEY = os.environ.get('SECRET_KEY', '2%&y5bnwd0go(ycc)jz$gys34d@o0nkws5o7tuyv@hj!7ow(hwzhn')
+DEBUG = os.environ.get('DEBUG', True)
+
+DOMAIN = os.environ.get('DOMAIN', 'localhost')
+SITE_NAME = os.environ.get('SITE_NAME', 'localhost')
+
+AUTH_USER_MODEL = 'accounts.User'
+
+
+
 ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -18,14 +27,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # my apps
+    'accounts',
     'post',
     'comments',
-    'accounts',
     # EXTERNAL APPS
     'drf_yasg',  # docs
     'taggit',  # tags
     'rest_framework',  # API
     'django_filters',  # filtering for drf
+    'corsheaders',
     'djoser',  # auth app
     # social auth
     'rest_framework.authtoken',
@@ -39,6 +49,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -65,6 +76,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'blog.wsgi.application'
+
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -95,15 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'Your KEY'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Your Secret'
 
-
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google.GoogleOAuth2',
-    'rest_framework_social_oauth2.backends.DjangoOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -124,9 +128,12 @@ REST_FRAMEWORK = {
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'your user'
-EMAIL_HOST_PASSWORD = 'your password'
+EMAIL_HOST_USER = os.environ.get('HOST_USER')  # your email user
+EMAIL_HOST_PASSWORD = os.environ.get('HOST_PASSWORD')  # your email password
 EMAIL_PORT = 587
+
+
+#auth
 
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
@@ -135,6 +142,16 @@ DJOSER = {
     'SEND_ACTIVATION_EMAIL': True,
     'SERIALIZERS': {},
 }
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('GOOGLE_OAUTH2_KEY') 
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('GOOGLE_OAUTH2_SECRET')
+
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'rest_framework_social_oauth2.backends.DjangoOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
@@ -162,7 +179,7 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-AUTH_USER_MODEL = 'accounts.User'
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 

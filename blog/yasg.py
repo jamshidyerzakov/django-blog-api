@@ -6,12 +6,12 @@ from drf_yasg import openapi
 schema_view = get_schema_view(
     openapi.Info(
         title="Django Blog",
-        default_version="v1",
-        description="Turorial blog",
+        default_version="v2",
+        description="Educational Blog",
         license=openapi.License(name="BSD License")
     ),
     public=True,
-    permission_classes=(permissions.AllowAny,),
+    permission_classes=(permissions.IsAuthenticatedOrReadOnly,),
 )
 
 urlpatterns = [
