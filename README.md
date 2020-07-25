@@ -2,7 +2,7 @@
 
 API for a blog written in django
 
-You can check here (testing period) — http://blog-tutorial-7657.herokuapp.com/swagger/
+You can check here (testing period) — http://blog-tutorial-7657.herokuapp.com/docs/
 
 # Setup
 
