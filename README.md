@@ -12,7 +12,7 @@ Create virtual environment and clone this repository:
 
 <code>>>> cd Scripts\activate</code>
 
-<code>>>> git clone https://github.com/jamshidyerzakov/blog-api.git</code>
+<code>>>> git clone https://github.com/jamshidyerzakov/django-blog-api.git</code>
 
 Install all packages from <strong> requirements.txt. </strong> :
 
@@ -20,7 +20,7 @@ Install all packages from <strong> requirements.txt. </strong> :
 
 Make migrations and migrate:
 
-<code>>>> cd blog-api</code>
+<code>>>> cd django-blog-api</code>
 
 <code>>>> python manage.py makemigrations</code>
 
