@@ -2,7 +2,7 @@ django-taggit==1.3.0
 djangorestframework-simplejwt==4.4.0
 djoser==2.0.3
 drf-yasg==1.17.1
-Pillow==7.1.2
+Pillow==10.0.1
 django-rest-framework-social-oauth2==1.1.0
 django-filter==2.3.0
 service-identity==18.1.0
